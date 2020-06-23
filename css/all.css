@@ -1,0 +1,40 @@
+#main {
+    margin-top: 20px;
+}
+
+#add_task_section {
+    width: 50%;
+}
+
+#task_list {
+    width: 50%;
+}
+
+#task_list_item input {
+    position: relative;
+    left: 10px;
+}
+
+#task_list_item span {
+    position: relative;
+    left: 12px;
+}
+
+.del_span {
+    text-decoration:line-through;
+}
+
+
+#task_list_footer {
+    background-color: rgb(246, 246, 246);
+    padding: 6px;
+}
+
+#task_list_footer span {
+    float: left;
+    padding: 6px;
+}
+
+#task_list_footer button {
+    float: right;    
+}

@@ -17,14 +17,16 @@ add_task_btn.addEventListener("click", addTask);
 
 
 function updateTask(e) {
-    curr_task = e.target.value;
+    curr_task_txt = e.target.value;
 }
 
 
 function addTask(e) {
-    task_list_data.push(curr_task);
-    // console.log(task_list_data);
-    renderTaskList();
+    if (curr_task_txt != "") {
+        task_list_data.push(curr_task_txt);
+        // console.log(task_list_data);
+        renderTaskList();
+    }
 }
 
 

@@ -1,35 +1,50 @@
-let curr_task_txt = "";
+// initial data
+let user_input_task = "";
 let task_list_data = [
     "小明：被檢舉騷擾，趕快找地方躲起來",
     "小明：去「漂亮阿姨」工作的地方接她下班",
 ];
 
 
-
-let input_task = document.querySelector("#input_task");
+// link variable to html tag
+let input_task_field = document.querySelector("#input_task");
 let add_task_btn = document.querySelector("#add_task_btn");
-let task_list = document.querySelector("#task_list");
+let task_list_view = document.querySelector("#task_list");
 
 
-input_task.addEventListener("input", updateTask);
-add_task_btn.addEventListener("click", addTask);
+// add input_tag, btn_tag event listener
+input_task_field.addEventListener("input", assignTaskData);
+add_task_btn.addEventListener("click", addToTaskList);
 
 
-
-function updateTask(e) {
-    curr_task_txt = e.target.value;
+// Start: declare task operate data function
+function assignTaskData(e) {
+    user_input_task = e.target.value;
 }
 
 
-function addTask(e) {
-    if (curr_task_txt != "") {
-        task_list_data.push(curr_task_txt);
-        // console.log(task_list_data);
-        renderTaskList();
+function addToTaskList(e) {
+    if (user_input_task != "") {
+        task_list_data.push(user_input_task);
+        renderTaskListView();
     }
 }
 
 
+function removeSingleTask(index) {
+    task_list_data.splice(index, 1);
+    renderTaskListView();
+}
+
+
+function clearAllTask() {
+    task_list_data = [];
+    renderTaskListView();
+}
+// End: declare task operate data function
+
+
+// Start: declare operate list view function
 function getListItemView(task_content, index) {
     let template = `
     <div id="task_list_item" class="list-group-item list-group-item-action">
@@ -56,33 +71,25 @@ function getListFooterView() {
 
 
 function addLineThrough(input_element) {
+    let cbox = input_element.nextElementSibling;
     if (input_element.checked) {
-        input_element.nextElementSibling.classList.add("del_span");
+        cbox.classList.add("del_span");
     }
     else {
-        input_element.nextElementSibling.classList.remove("del_span");
+        cbox.classList.remove("del_span");
     }
 }
 
 
-function removeSingleTask(index) {
-    task_list_data.splice(index, 1);
-    renderTaskList();
-}
-
-
-function clearAllTask() {
-    task_list_data = [];
-    renderTaskList();
-}
-
-
-function renderTaskList() {
+function renderTaskListView() {
     let result = '';
     task_list_data.forEach((item, index) => {
         result += getListItemView(item, index);
     });
-    task_list.innerHTML = result + getListFooterView();
+    task_list_view.innerHTML = result + getListFooterView();
 }
+// End: declare operate list view function
 
-renderTaskList();
+
+// initial render task-list-view
+renderTaskListView();

@@ -17,9 +17,15 @@ input_task_field.addEventListener("input", assignTaskData);
 add_task_btn.addEventListener("click", addToTaskList);
 
 
-// Start: declare task operate data function
+// Start: declare operate data function
 function assignTaskData(e) {
     user_input_task = e.target.value;
+}
+
+
+function clearUserInput() {
+    user_input_task = "";
+    renderInputView();
 }
 
 
@@ -27,6 +33,7 @@ function addToTaskList(e) {
     if (user_input_task != "") {
         task_list_data.push(user_input_task);
         renderTaskListView();
+        clearUserInput();
     }
 }
 
@@ -44,7 +51,12 @@ function clearAllTask() {
 // End: declare task operate data function
 
 
-// Start: declare operate list view function
+// Start: declare operate input, list view function
+function renderInputView() {
+    input_task_field.value = user_input_task;
+}
+
+
 function getListItemView(task_content, index) {
     let template = `
     <div id="task_list_item" class="list-group-item list-group-item-action">
